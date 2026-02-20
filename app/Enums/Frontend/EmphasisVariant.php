@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enums\Response;
+namespace App\Enums\Frontend;
 
-enum ResponseVariant: string
+enum EmphasisVariant: string
 {
     case NEUTRAL = 'neutral';
     case AFFIRMATIVE = 'affirmative';

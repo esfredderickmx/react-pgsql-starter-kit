@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Enums\Response\ResponseStyle;
-use App\Enums\Response\ResponseVariant;
+use App\Enums\Frontend\EmphasisVariant;
+use App\Enums\Frontend\ResponseStyle;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use function back;
 
 class AppException extends Exception
 {
-    public function __construct(string $message, protected ResponseStyle $style = ResponseStyle::FEEDBACK, protected ResponseVariant $variant = ResponseVariant::AFFIRMATIVE)
+    public function __construct(string $message, protected ResponseStyle $style = ResponseStyle::ALERT, protected EmphasisVariant $variant = EmphasisVariant::AFFIRMATIVE)
     {
         parent::__construct($message, 400);
     }

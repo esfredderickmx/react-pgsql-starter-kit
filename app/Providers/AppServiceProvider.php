@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Enums\Response\ResponseStyle;
-use App\Enums\Response\ResponseVariant;
+use App\Enums\Frontend\EmphasisVariant;
+use App\Enums\Frontend\ResponseStyle;
 use App\Services\PgsqlVerificationService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function declareMacros(): void
     {
-        Inertia::macro('notify', function (string $message, ResponseStyle $style, ResponseVariant $variant = ResponseVariant::AFFIRMATIVE) {
+        Inertia::macro('notify', function (string $message, ResponseStyle $style, EmphasisVariant $variant = EmphasisVariant::AFFIRMATIVE) {
             /** @phpstan-ignore method.notFound ($this is bound to Inertia\ResponseFactory at runtime) */
             return $this->flash($style->value, [
                 'message' => $message,

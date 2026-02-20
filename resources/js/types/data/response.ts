@@ -1,7 +1,7 @@
 import { App } from '@/wayfinder/types';
-import ResponseVariant = App.Enums.Response.ResponseVariant;
+import EmphasisVariant = App.Enums.Frontend.EmphasisVariant;
 
 export type Response = {
-    variant: ResponseVariant,
-    message: string
-}
+    variant: EmphasisVariant;
+    message: string;
+};

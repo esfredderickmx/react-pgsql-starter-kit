@@ -10,7 +10,7 @@ declare module '@inertiajs/core' {
             [key: string]: unknown;
         };
         flashDataType: {
-            notice?: Response;
+            toast?: Response;
         };
     }
 }
