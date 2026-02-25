@@ -44,7 +44,7 @@
         "setup": [
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "@php -r \"array_map(fn(\\$d) => is_dir(\\$d) || mkdir(\\$d, 0755, true), ['storage/framework/views', 'storage/framework/sessions', 'storage/framework/testing', 'storage/framework/cache/data']);\"",
+            "@php artisan app:create-storage-directories --ansi",
             "@php artisan key:generate",
             "@php artisan migrate --force",
             "pnpm install",
@@ -90,7 +90,7 @@
             "@php artisan key:generate --ansi",
             "@php artisan app:configure-database --ansi",
             "@php artisan migrate --graceful --ansi",
-            "@php -r \"array_map(fn(\\$d) => is_dir(\\$d) || mkdir(\\$d, 0755, true), ['storage/framework/views', 'storage/framework/sessions', 'storage/framework/testing', 'storage/framework/cache/data']);\""
+            "@php artisan app:create-storage-directories --ansi"
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
