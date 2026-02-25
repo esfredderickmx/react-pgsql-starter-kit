@@ -91,8 +91,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
             "@php artisan migrate --graceful --ansi",
-            "@php artisan boost:install --ansi",
             "@php -r \"array_map(fn(\\$d) => is_dir(\\$d) || mkdir(\\$d, 0755, true), ['storage/framework/views', 'storage/framework/sessions', 'storage/framework/testing', 'storage/framework/cache/data']);\""
+            "@php artisan boost:install --ansi",
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
