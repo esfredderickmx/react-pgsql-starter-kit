@@ -63,6 +63,12 @@
         "lint": [
             "pint --parallel"
         ],
+        "quality": [
+            "pnpm run format",
+            "pnpm run lint",
+            "pint --parallel app/",
+            "phpstan analyse app/ --memory-limit=2G"
+        ],
         "test:lint": [
             "pint --parallel --test"
         ],
