@@ -51,12 +51,20 @@ class ConfigureDatabaseCommand extends Command
             hint: 'Leave empty if no password is required.',
         );
 
+        $migrationsTable = text(
+            label: 'Migrations table',
+            default: $this->currentEnvValue('DB_MIGRATIONS_TABLE', 'migrations'),
+            required: true,
+            hint: 'Use schema.table notation to store migrations in a specific schema (e.g. database.migrations).',
+        );
+
         $this->writeEnvValue('DB_CONNECTION', 'pgsql');
         $this->writeEnvValue('DB_HOST', $host);
         $this->writeEnvValue('DB_PORT', $port);
         $this->writeEnvValue('DB_DATABASE', $database);
         $this->writeEnvValue('DB_USERNAME', $username);
         $this->writeEnvValue('DB_PASSWORD', $pass);
+        $this->writeEnvValue('DB_MIGRATIONS_TABLE', $migrationsTable);
 
         outro("Database configuration saved. Connecting to «{$database}»…");
 
