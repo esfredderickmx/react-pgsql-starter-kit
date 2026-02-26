@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\FileGeneration;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-#[AsCommand(name: 'make:action')]
-class MakeActionCommand extends GeneratorCommand
+#[AsCommand(name: 'make:data')]
+class MakeDataCommand extends GeneratorCommand
 {
-    protected $name = 'make:action';
+    protected $name = 'make:data';
 
-    protected $description = 'Create a new action class';
+    protected $description = 'Create a new data transfer object class';
 
-    protected $type = 'Action';
+    protected $type = 'Data';
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/action.stub');
+        return $this->resolveStubPath('/stubs/data.stub');
     }
 
     protected function resolveStubPath(string $stub): string
@@ -31,8 +31,8 @@ class MakeActionCommand extends GeneratorCommand
     {
         $name = trim($this->argument('name'));
 
-        if (! str_ends_with($name, 'Action')) {
-            $name .= 'Action';
+        if (! str_ends_with($name, 'Data')) {
+            $name .= 'Data';
         }
 
         return $name;
@@ -40,13 +40,13 @@ class MakeActionCommand extends GeneratorCommand
 
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Actions';
+        return $rootNamespace.'\Data';
     }
 
     protected function getOptions(): array
     {
         return [
-            ['force', 'f', InputOption::VALUE_NONE, 'Create the action even if the action already exists'],
+            ['force', 'f', InputOption::VALUE_NONE, 'Create the data class even if the class already exists'],
         ];
     }
 }
