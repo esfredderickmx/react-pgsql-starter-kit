@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use PDO;
 use Throwable;
+
 use function config;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
