@@ -43,6 +43,8 @@ composer dev
 
 ## Architecture Overview
 
+This section describes the **conventions and patterns** embedded in this starter kit — not automatic behaviors. They define how the codebase is structured and how new features should be built. Detailed guidelines live in `.ai/guidelines/project-architecture.md`.
+
 ### PostgreSQL Schemas as Domain Boundaries
 
 Tables live in named schemas (`client`, `authentication`, `storage`, `queue`) instead of the default `public` schema. Schemas are created via a dedicated initial migration. Models declare their table with schema-qualified names:
