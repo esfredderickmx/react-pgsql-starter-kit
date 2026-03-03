@@ -59,13 +59,15 @@ class ConfigureDatabaseCommand extends Command
             hint: 'Use schema.table notation to store migrations in a specific schema (e.g. database.migrations).',
         );
 
-        $this->writeEnvValue('DB_CONNECTION', 'pgsql');
-        $this->writeEnvValue('DB_HOST', $host);
-        $this->writeEnvValue('DB_PORT', $port);
-        $this->writeEnvValue('DB_DATABASE', $database);
-        $this->writeEnvValue('DB_USERNAME', $username);
-        $this->writeEnvValue('DB_PASSWORD', $pass);
-        $this->writeEnvValue('DB_MIGRATIONS_TABLE', $migrationsTable);
+        $this->writeDatabaseEnvValues([
+            'DB_CONNECTION' => 'pgsql',
+            'DB_HOST' => $host,
+            'DB_PORT' => $port,
+            'DB_DATABASE' => $database,
+            'DB_USERNAME' => $username,
+            'DB_PASSWORD' => $pass,
+            'DB_MIGRATIONS_TABLE' => $migrationsTable,
+        ]);
 
         outro("Database configuration saved. Connecting to «{$database}»…");
 
@@ -83,20 +85,32 @@ class ConfigureDatabaseCommand extends Command
         return $default;
     }
 
-    private function writeEnvValue(string $key, string $value): void
+    /**
+     * Write all database env values in a single pass to avoid
+     * re-reading stale content between writes.
+     *
+     * @param  array<string, string>  $values
+     */
+    private function writeDatabaseEnvValues(array $values): void
     {
         $envFile = $this->laravel->environmentFilePath();
         $contents = file_get_contents($envFile) ?: '';
 
-        $safeValue = preg_match('/\s/', $value) ? '"'.$value.'"' : $value;
+        foreach ($values as $key => $value) {
+            $safeValue = preg_match('/\s/', $value) ? '"'.$value.'"' : $value;
+            $line = "{$key}={$safeValue}";
 
-        // Replace active or commented-out lines for this key.
-        $updated = preg_replace("/^#?\s*{$key}=.*$/m", "{$key}={$safeValue}", $contents, 1, $count);
+            // Replace active or commented-out lines for this key.
+            $contents = preg_replace("/^#?\s*{$key}=.*$/m", $line, $contents, 1, $count);
 
-        if ($count === 0 || $updated === null) {
-            $updated = rtrim($contents)."\n{$key}={$safeValue}\n";
+            if ($count === 0 || $contents === null) {
+                $contents = rtrim($contents)."\n{$line}\n";
+            }
         }
 
-        file_put_contents($envFile, $updated);
+        // Ensure a blank line before DB_CONNECTION for readability.
+        $contents = preg_replace("/(?<!\n)\nDB_CONNECTION=/", "\n\nDB_CONNECTION=", $contents);
+
+        file_put_contents($envFile, $contents);
     }
 }
