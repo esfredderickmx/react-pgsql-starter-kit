@@ -3,6 +3,8 @@
 namespace App\Console\Commands\Setup;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\intro;
@@ -65,6 +67,9 @@ class InitializeDatabaseCommand extends Command
         $envFile = $this->laravel->environmentFilePath();
         $contents = file_get_contents($envFile) ?: '';
 
+        /** @var array<string, string> $envValues */
+        $envValues = [];
+
         foreach (explode("\n", $contents) as $line) {
             $line = trim($line);
 
@@ -77,22 +82,24 @@ class InitializeDatabaseCommand extends Command
                 $key = trim($key);
                 $value = trim($value, '"\'');
 
+                $envValues[$key] = $value;
+
                 $_ENV[$key] = $value;
                 $_SERVER[$key] = $value;
                 putenv("{$key}={$value}");
             }
         }
 
-        // Clear the cached config so Laravel re-reads the environment.
-        $this->laravel['config']->set('database.default', 'pgsql');
-        $this->laravel['config']->set('database.connections.pgsql.host', env('DB_HOST'));
-        $this->laravel['config']->set('database.connections.pgsql.port', env('DB_PORT'));
-        $this->laravel['config']->set('database.connections.pgsql.database', env('DB_DATABASE'));
-        $this->laravel['config']->set('database.connections.pgsql.username', env('DB_USERNAME'));
-        $this->laravel['config']->set('database.connections.pgsql.password', env('DB_PASSWORD'));
-        $this->laravel['config']->set('database.migrations.table', env('DB_MIGRATIONS_TABLE', 'migrations'));
+        // Update the cached config so Laravel uses the new values.
+        Config::set('database.default', 'pgsql');
+        Config::set('database.connections.pgsql.host', $envValues['DB_HOST'] ?? '127.0.0.1');
+        Config::set('database.connections.pgsql.port', $envValues['DB_PORT'] ?? '5432');
+        Config::set('database.connections.pgsql.database', $envValues['DB_DATABASE'] ?? 'laravel');
+        Config::set('database.connections.pgsql.username', $envValues['DB_USERNAME'] ?? 'postgres');
+        Config::set('database.connections.pgsql.password', $envValues['DB_PASSWORD'] ?? '');
+        Config::set('database.migrations.table', $envValues['DB_MIGRATIONS_TABLE'] ?? 'migrations');
 
         // Purge the cached DB connection so the next query uses the new config.
-        $this->laravel['db']->purge('pgsql');
+        DB::purge('pgsql');
     }
 }
