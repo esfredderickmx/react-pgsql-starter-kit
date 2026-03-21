@@ -114,4 +114,18 @@ return [
 
     'prefix' => env('CACHE_PREFIX', Str::slug((string) env('APP_NAME', 'laravel')).'-cache-'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Serializable Classes
+    |--------------------------------------------------------------------------
+    |
+    | This option controls which classes may be unserialized from the cache.
+    | Setting this to `false` disables object unserialization entirely,
+    | which hardens against PHP deserialization attacks. If your app
+    | caches PHP objects, list the allowed classes explicitly.
+    |
+    */
+
+    'serializable_classes' => false,
+
 ];
