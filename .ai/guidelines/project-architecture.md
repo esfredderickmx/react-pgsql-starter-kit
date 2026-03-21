@@ -86,6 +86,9 @@ All business logic lives in Action classes. Controllers never contain business l
 ```bash
 php artisan make:action Client/CreateUser
 # → app/Actions/Client/CreateUserAction.php (suffix auto-appended)
+
+php artisan make:action Client/CreateUser -d
+# → also creates app/Data/Client/CreateUserData.php
 ```
 
 Actions are plain classes with a `handle()` method:

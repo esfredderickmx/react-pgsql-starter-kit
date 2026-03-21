@@ -73,7 +73,7 @@ tests/
 All business logic goes into Action classes — controllers stay thin. Custom artisan commands generate both:
 
 ```bash
-php artisan make:action Client/CreateUser    # → app/Actions/Client/CreateUserAction.php
+php artisan make:action Client/CreateUser    # → app/Actions/Client/CreateUserAction.php (-d to also create DTO)
 php artisan make:data Client/CreateUser      # → app/Data/Client/CreateUserData.php
 ```
 
@@ -151,7 +151,7 @@ Inertia shared props and flash data are typed through module augmentation in `re
 
 | Command | Description |
 |---|---|
-| `php artisan make:action {name}` | Action class (auto-suffixed) |
+| `php artisan make:action {name}` | Action class (auto-suffixed, `-d` to also create DTO) |
 | `php artisan make:data {name}` | DTO class (auto-suffixed) |
 
 All standard `php artisan make:*` commands (model, controller, request, migration, etc.) are available as usual.

@@ -3,6 +3,7 @@
 namespace App\Console\Commands\FileGeneration;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -43,9 +44,28 @@ class MakeActionCommand extends GeneratorCommand
         return $rootNamespace.'\Actions';
     }
 
+    public function handle(): ?bool
+    {
+        if (parent::handle() === false) {
+            return false;
+        }
+
+        if ($this->option('data')) {
+            $dataName = Str::beforeLast($this->getNameInput(), 'Action');
+
+            $this->call('make:data', [
+                'name' => $dataName,
+                '--force' => $this->option('force'),
+            ]);
+        }
+
+        return null;
+    }
+
     protected function getOptions(): array
     {
         return [
+            ['data', 'd', InputOption::VALUE_NONE, 'Create a new data transfer object class for the action'],
             ['force', 'f', InputOption::VALUE_NONE, 'Create the action even if the action already exists'],
         ];
     }
