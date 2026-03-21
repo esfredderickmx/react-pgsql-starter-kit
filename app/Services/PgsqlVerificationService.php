@@ -29,7 +29,7 @@ class PgsqlVerificationService
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public static function ensureDatabaseAndSchemaExist(): void
     {

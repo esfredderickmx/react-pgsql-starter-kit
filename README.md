@@ -140,7 +140,6 @@ Inertia shared props and flash data are typed through module augmentation in `re
 | Command | Description                                            |
 |---|--------------------------------------------------------|
 | `app:configure-database` | Re-configures db postgres credentials directly in .env |
-| `app:create-storage-directories` | Create missing needed folders within storage/framework |
 
 ### Code Quality
 
