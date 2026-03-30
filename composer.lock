@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37055853af3347f896a23676b9536e79",
+    "content-hash": "214a14fc14ab00d0cf9b39ad75559e52",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -8576,6 +8576,63 @@
                 "source": "https://github.com/doctrine/deprecations/tree/1.1.6"
             },
             "time": "2026-02-07T07:09:04+00:00"
+        },
+        {
+            "name": "esfredderick/useful-artisan-commands",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/esfredderickmx/useful-artisan-commands.git",
+                "reference": "00b2377f93a1da026dbed2b5da9951d800afcf7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/esfredderickmx/useful-artisan-commands/zipball/00b2377f93a1da026dbed2b5da9951d800afcf7f",
+                "reference": "00b2377f93a1da026dbed2b5da9951d800afcf7f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "laravel/prompts": "^0.3|^1.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "EsFredDerick\\UsefulArtisanCommands\\UsefulArtisanCommandsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EsFredDerick\\UsefulArtisanCommands\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastián Montero",
+                    "email": "esfredderick@gmail.com"
+                }
+            ],
+            "description": "A collection of useful Laravel Artisan commands for generating actions, DTOs, and more.",
+            "keywords": [
+                "actions",
+                "artisan",
+                "commands",
+                "dto",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/esfredderickmx/useful-artisan-commands/issues",
+                "source": "https://github.com/esfredderickmx/useful-artisan-commands/tree/v1.0.0"
+            },
+            "time": "2026-03-30T03:15:28+00:00"
         },
         {
             "name": "fakerphp/faker",

@@ -22,6 +22,7 @@
         "laravel/wayfinder": "dev-next"
     },
     "require-dev": {
+        "esfredderick/useful-artisan-commands": "^1.0",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel/boost": "^2.0",
@@ -52,7 +53,7 @@
             "@php artisan key:generate",
             "pnpm install",
             "pnpm run build",
-            "@php artisan app:configure-database --ansi",
+            "@php artisan app:config-db --ansi",
             "@php artisan migrate --graceful --ansi"
         ],
         "dev": [
