@@ -70,7 +70,7 @@ tests/
 
 ### Action-Based Business Logic
 
-All business logic goes into Action classes — controllers stay thin. Custom artisan commands generate both:
+All business logic goes into Action classes — controllers stay thin. Artisan commands for generating both are provided by [`esfredderick/useful-artisan-commands`](https://github.com/esfredderickmx/useful-artisan-commands):
 
 ```bash
 php artisan make:action Client/CreateUser    # → app/Actions/Client/CreateUserAction.php (-d to also create DTO)
@@ -135,24 +135,19 @@ Inertia shared props and flash data are typed through module augmentation in `re
 
 ## Custom Available Commands
 
-### Development (via artisan)
+Commands provided by [`esfredderick/useful-artisan-commands`](https://github.com/esfredderickmx/useful-artisan-commands) (dev dependency):
 
-| Command | Description                                            |
-|---|--------------------------------------------------------|
-| `app:configure-database` | Re-configures db postgres credentials directly in .env |
+| Command | Description |
+|---|---|
+| `php artisan make:action {name}` | Action class (auto-suffixed, `-d` to also create DTO) |
+| `php artisan make:data {name}` | DTO class (auto-suffixed) |
+| `php artisan app:config-db` | Re-configures PostgreSQL credentials directly in `.env` |
 
 ### Code Quality
 
 | Command | Description |
 |---|---|
 | `composer run quality` | Prettier + ESLint + Pint + Larastan |
-
-### Code Generation
-
-| Command | Description |
-|---|---|
-| `php artisan make:action {name}` | Action class (auto-suffixed, `-d` to also create DTO) |
-| `php artisan make:data {name}` | DTO class (auto-suffixed) |
 
 All standard `php artisan make:*` commands (model, controller, request, migration, etc.) are available as usual.
 
