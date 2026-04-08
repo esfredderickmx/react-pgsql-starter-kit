@@ -1,13 +1,13 @@
 # Laravel Starter Kit — Inertia React + PostgreSQL
 
-An opinionated Laravel starter kit built on **PostgreSQL schemas**, **Inertia v2 + React 19**, and an **action-based architecture**. Designed for developers who want clear domain boundaries, type safety across the full stack, and sensible defaults from day one.
+An opinionated Laravel starter kit built on **PostgreSQL schemas**, **Inertia v3 + React 19**, and an **action-based architecture**. Designed for developers who want clear domain boundaries, type safety across the full stack, and sensible defaults from day one.
 
 ## Stack
 
 | Layer | Technology |
 |---|---|
 | Backend | Laravel 12, PHP 8.4 |
-| Frontend | React 19, TypeScript, Inertia v2 |
+| Frontend | React 19, TypeScript, Inertia v3 |
 | Database | PostgreSQL (named schemas) |
 | Styling | Tailwind CSS v4, shadcn/ui |
 | Type Bridge | Laravel Wayfinder (dev-next) |
